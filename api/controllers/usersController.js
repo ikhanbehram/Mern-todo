@@ -5,11 +5,12 @@ const jwt = require("jsonwebtoken");
 exports.signup_post = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  if (!username || password) {
+   return res.status(401).send("required fields cannot be empty")
+  }
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
-      return res.status(500).json({
-        error: err,
-      });
+      return res.status(500).json(err);
     } else {
       User.findAndCountAll({ where: { user_name: username } })
         .then((result) => {
@@ -54,6 +55,9 @@ exports.signup_post = (req, res, next) => {
 exports.login_post = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  if (!username || password) {
+   return res.status(401).send("required fields cannot be empty")
+  }
   User.findOne({ where: { user_name: username } })
     .then((user) => {
       if (user) {

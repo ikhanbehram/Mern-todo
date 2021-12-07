@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import FormComponent from './components/form/form';
+import TodoList from './components/todolist/todoList';
+import Layout from './components/layout/layout';
+import ModalComponent from './components/modal/Modal';
+import { useState } from 'react';
+import { Route } from 'react-router-dom'
+import Signup from './pages/signup/SignUp';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Layout>
+     <Route path="/" exact={true}>
+       <Signup/>
+     </Route>
+     <Route path="/list">
+     <TodoList></TodoList>
+     </Route>
+    </Layout>
+  )
 }
 
 export default App;
