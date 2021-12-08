@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
  
 
-const FormComponent = ({title}) => {
+const FormComponent = ({title, onSubmit}) => {
 
     const schema = yup.object({
         username: yup.string().required(),
@@ -18,7 +18,6 @@ const FormComponent = ({title}) => {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data) =>{console.table(data)}
     return (
        <Layout>
            <h1 className={classes.title}>{title}</h1>

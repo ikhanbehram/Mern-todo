@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 exports.signup_post = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  if (!username || password) {
+  if (!username || !password) {
    return res.status(401).send("required fields cannot be empty")
   }
   bcrypt.hash(password, 10, (err, hash) => {

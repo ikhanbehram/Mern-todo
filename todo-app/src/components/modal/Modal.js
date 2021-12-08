@@ -14,7 +14,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const ModalComponent = ({ show, onHideModal }) => {
   const schema = yup
     .object({
-      todo: yup.string().max(15, "Cannot exceed more than 15 words").required(),
+      todo: yup.string().max(15, "Cannot exceed more than 15 characters").required(),
     })
     .required();
 
