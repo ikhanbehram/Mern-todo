@@ -1,7 +1,7 @@
-import FormComponent from "../../components/form/form"
+import FormComponent from "../../components/form/form";
 
-const Signup = ()=>{
-   return (
-    <FormComponent title="Signup"/>
-   )
-}
+const Login = () => {
+  return <FormComponent title="Login" />;
+};
+
+export default Login;

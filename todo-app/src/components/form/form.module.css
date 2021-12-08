@@ -1,14 +1,14 @@
-.formClass{
-    padding: 4rem 4rem;
-    border: .1px solid lightgrey !important;
-    border-radius: 20px;
-    background-color: rgba(0, 0,0,.05);
-    margin-top: 60px;
+.formClass {
+  padding: 4rem 4rem;
+  border: 0.1px solid lightgrey !important;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-top: 50px;
 }
 .title {
-    letter-spacing: 3px;
-    text-align: center;
+  letter-spacing: 3px;
+  text-align: center;
 }
-.error{
-    color: red;
+.error {
+  color: red;
 }
