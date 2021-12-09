@@ -3,6 +3,9 @@ const Todo = require("../models/Todo");
 exports.add_post = (req, res, next) => {
   const taskTitle = req.body.task;
   const userId = req.userData.id;
+  if (!taskTitle) {
+    res.status(401).send("nothing to add");
+  }
   Todo.create({
     title: taskTitle,
     userId: userId,
@@ -40,18 +43,18 @@ exports.completed = (req, res, next) => {
   Todo.update({ completed: 1 }, { where: { id: taskId } })
     .then((completed) => {
       res.status(201).json({
-        completed: completed,
+        taskId: taskId,
         message: "task has been completed",
       });
     })
     .catch((err) => err);
 };
 exports.remove_task = (req, res, next) => {
-  const taskId = req.userData.id;
+  const taskId = req.params.taskId;
   Todo.destroy({ where: { id: taskId } })
     .then((removedTask) => {
       res.status(201).json({
-        removedTask,
+        taskId: taskId,
         message: "Task deleted",
       });
     })

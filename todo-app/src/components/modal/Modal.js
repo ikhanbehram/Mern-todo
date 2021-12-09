@@ -11,10 +11,13 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const ModalComponent = ({ show, onHideModal }) => {
+const ModalComponent = ({ show, onHideModal, onSubmitForm }) => {
   const schema = yup
     .object({
-      todo: yup.string().max(15, "Cannot exceed more than 15 characters").required(),
+      task: yup
+        .string()
+        .max(15, "Cannot exceed more than 15 characters")
+        .required(),
     })
     .required();
 
@@ -26,34 +29,34 @@ const ModalComponent = ({ show, onHideModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const onAddTodo = (data) => {
-    console.log(data);
-  };
-
   return (
     <>
       <Modal show={show} onHide={onHideModal}>
         <ModalHeader closeButton>
-          <ModalTitle>Adding Todo</ModalTitle>
+          <ModalTitle>Add todo</ModalTitle>
         </ModalHeader>
-        <form onSubmit={handleSubmit(onAddTodo)}>
+        <form>
           <ModalBody>
             <Form.Group>
               <Form.Label>Todo Text:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="E-g Read a book"
-                {...register("todo")}
+                {...register("task")}
               ></Form.Control>
             </Form.Group>
-            {errors.todo && <p>{errors.todo.message}</p>}
+            {errors.task && <p>{errors.task.message}</p>}
           </ModalBody>
           <ModalFooter>
             <Button variant="secondary" type="button" onClick={onHideModal}>
               Close
             </Button>
-            <Button variant="info" type="submit" onClick={onHideModal}>
-              Save Todo
+            <Button
+              variant="info"
+              type="submit"
+              onClick={handleSubmit(onSubmitForm)}
+            >
+              Save
             </Button>
           </ModalFooter>
         </form>

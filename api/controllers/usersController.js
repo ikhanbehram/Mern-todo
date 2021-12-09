@@ -6,7 +6,7 @@ exports.signup_post = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   if (!username || !password) {
-   return res.status(401).send("required fields cannot be empty")
+    return res.status(401).send("required fields cannot be empty");
   }
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
@@ -15,9 +15,7 @@ exports.signup_post = (req, res, next) => {
       User.findAndCountAll({ where: { user_name: username } })
         .then((result) => {
           if (result.count > 0) {
-            res.status(403).json({
-              message: "USER NAME ALREADY EXISTS",
-            });
+            res.status(401).send("USER NAME ALREADY EXISTS");
           } else {
             User.create({
               user_name: username,
@@ -55,8 +53,8 @@ exports.signup_post = (req, res, next) => {
 exports.login_post = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  if (!username || password) {
-   return res.status(401).send("required fields cannot be empty")
+  if (!username || !password) {
+    return res.status(401).send("required fields cannot be empty");
   }
   User.findOne({ where: { user_name: username } })
     .then((user) => {
