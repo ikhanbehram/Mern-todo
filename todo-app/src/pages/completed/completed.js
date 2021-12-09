@@ -5,23 +5,23 @@ import List from "../../components/list/List";
 import { getCompleted } from "../../store/reducers/todoList.reducer";
 
 const Completed = () => {
-  const { completedTodos } = useSelector((state) => state.todo);
-  console.log(completedTodos, "asdasd");
   const dispatch = useDispatch();
-  const getTodos = () => {
-    dispatch(getCompleted());
-  };
+  const { completedTodos: todos } = useSelector((state) => state.todo);
+  console.log(todos, "asdasd");
 
   useEffect(() => {
-    getTodos();
+    dispatch(getCompleted());
   }, []);
   return (
     <Layout>
       <h1 className="text-success">Completed</h1>
-      {completedTodos.map((todo) => {
-        <List text={todo.title} key={todo.id}>
-          <button className="btn btn-danger">Remove</button>
-        </List>;
+      {!todos.length > 0 && <h2 className="text-center text-success"></h2>}
+      {todos.map((todo) => {
+        return (
+          <List text={todo.title} key={todo.id}>
+            <button className="btn btn-sm btn-danger">Remove</button>
+          </List>
+        );
       })}
     </Layout>
   );
