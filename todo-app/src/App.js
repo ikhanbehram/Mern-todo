@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Layout from "./components/layout/layout";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Signup from "./pages/signup/SignUp";
 import TodoList from "./pages/todolist/todoList";
 import Completed from "./pages/completed/completed";
@@ -10,22 +10,22 @@ import Login from "./pages/login/Login";
 
 function App() {
   return (
-    <Layout>
+    <BrowserRouter>
       <Switch>
-        <Route path="/" exact={true}>
+        <Route path="/" exact>
           <Signup />
         </Route>
-        <Route path="/login">
-          <Login></Login>
+        <Route path="/login" exact>
+          <Login />
         </Route>
-        <Route path="/list">
-          <TodoList></TodoList>
+        <Route path="/list" exact>
+          <TodoList />
         </Route>
-        <Route path="/completed">
-          <Completed></Completed>
+        <Route path="completed" exact>
+          <Completed />
         </Route>
       </Switch>
-    </Layout>
+    </BrowserRouter>
   );
 }
 

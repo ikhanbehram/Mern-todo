@@ -26,6 +26,7 @@ export const login = createAsyncThunk("user/login", async (formData) => {
   );
   console.log(response.data.token);
   localStorage.setItem("token", response.data.token);
+  console.log(response.data);
   return response.data;
 });
 
@@ -56,9 +57,11 @@ export const counterSlice = createSlice({
       state.token = localStorage.getItem("token");
       state.user = payload.user;
     },
-    [login.rejected]: (state, { payload }) => {
+    [login.rejected]: (state, action) => {
+      console.log("WE ARE HERE IN REJECTED");
+      console.log(action);
       state.isLoading = false;
-      state.error = payload;
+      state.error = action.error.message;
     },
   },
 });

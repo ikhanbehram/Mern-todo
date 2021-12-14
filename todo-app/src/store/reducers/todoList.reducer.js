@@ -16,8 +16,7 @@ export const addTodo = createAsyncThunk("todo/addTodo", async (todoData) => {
     todoData,
     { headers: { Authorization: `Bearer ${initialState.token}` } }
   );
-  console.log(response);
-  return response;
+  return response.data.task;
 });
 export const CompleteTodo = createAsyncThunk(
   "todo/CompleteTodo",
@@ -68,7 +67,7 @@ export const counterSlice = createSlice({
     },
     [addTodo.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.todos.push(payload.data.task);
+      state.todos.push(payload);
     },
     [addTodo.rejected]: (state, { payload }) => {
       state.isLoading = false;

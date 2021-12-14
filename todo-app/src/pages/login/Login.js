@@ -15,17 +15,13 @@ const Login = () => {
     }
   }, [isAuthenticated]);
   const onSubmit = (data) => {
-    try {
-      dispatch(login(data));
-      console.log(data);
-    } catch (err) {
-      error = err.message;
-    }
+    dispatch(login(data));
   };
-  return error ? (
-    <p>{error}</p>
-  ) : (
-    <FormComponent title="Login" onSubmit={onSubmit} />
+  return (
+    <>
+      <FormComponent title="Login" onSubmit={onSubmit} />
+      {error && <h1>{error}</h1>}
+    </>
   );
 };
 

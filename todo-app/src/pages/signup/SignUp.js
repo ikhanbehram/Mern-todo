@@ -14,23 +14,21 @@ const Signup = () => {
     try {
       dispatch(signup(data));
       if (isAuthenticated) {
-        history.push("/list");
+        history.replace("/list");
       }
     } catch (err) {
       error = err.message;
     }
   };
 
-  return isLoading ? (
-    <p>Loading....</p>
-  ) : (
+  return (
     <>
       <FormComponent title="Signup" onSubmit={onSubmit} />
-      {error && (
-        <div className="col-6 offset-4 pr-5 pt-3 pr-5">
-          <h3 className="text-danger">Auth Failed</h3>
-        </div>
-      )}
+      {/* {error && (
+      <div className="col-6 offset-4 pr-5 pt-3 pr-5">
+        <h3 className="text-danger">Auth Failed</h3>
+      </div>
+    )} */}
       <div className="row">
         <div className="col-6 offset-2 pt-2 pl-5">
           <p>
